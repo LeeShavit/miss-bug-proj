@@ -1,6 +1,8 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import { bugService } from './services/bugs.service.js'
+import { pdfService } from "./services/pdf.service.js"
+
 
 const app = express()
 
@@ -68,4 +70,17 @@ app.get('/api/bug/:bugId/remove', (req, res) => {
             res.status(500).send('Cannot remove bug')
         })
 
+})
+
+//saveAsPDF
+
+app.get('/api/bug/download', (req,res)=>{
+    bugService.query()
+    .then(bugs=> pdfService.buildBugPDF(bugs))
+    .then(()=>{
+        res.status(201).send('file ready')
+    })
+    .catch(err=>{
+        res.status(500).send('Cannot create pdf', err)
+    })
 })

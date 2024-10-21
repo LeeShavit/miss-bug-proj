@@ -12,11 +12,25 @@ export const bugService = {
     getById,
     save,
     remove,
+    getDefaultFilter,
 }
 
 
-function query() {
-    return axios.get(BASE_URL).then(res => res.data)
+function query(filterBy) {
+    return axios.get(BASE_URL)
+        .then(res => res.data)
+        .then(bugs => {
+            if (filterBy.txt) {
+                const regExp = new RegExp(filterBy.bodyTxt, 'i')
+                bugs = bugs.filter(bug => regExp.test(bug.title))
+            }
+            if (filterBy.minSeverity) {
+                bugs = bugs.filter(bug => bug.severity >= filterBy.minSeverity)
+            }
+            if (filterBy.date) {
+                bugs = bugs.filter(bug => filterBy.date > bug.createdAt - 43200000 && filterBy.date < bug.createdAt + 43200000)
+            }
+        })
 }
 
 function getById(bugId) {
@@ -30,6 +44,10 @@ function remove(bugId) {
 function save(bug) {
     let query = new URLSearchParams(bug)
     return axios.get(BASE_URL + 'save?' + query.toString()).then(res => res.data)
+}
+
+function getDefaultFilter() {
+    return { txt: '', minSeverity: 0, data: '' }
 }
 
 // function _createBugs() {
