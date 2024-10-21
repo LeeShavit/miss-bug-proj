@@ -1,27 +1,49 @@
 [
     {
-        "_id": "EF4HR",
-        "title": "Infinite Loop Detected",
-        "severity": 3
+        "_id": "RUAyM",
+        "title": "bug111",
+        "severity": 2
     },
     {
-        "_id": "exBjn",
-        "title": "Infinite Loop Detected",
-        "severity": 4
-    },
-    {
-        "title": "Keyboard Not Found",
-        "severity": 3,
-        "_id": "K3YB0RD"
-    },
-    {
-        "title": "404 Coffee Not Found",
+        "_id": "abc123",
+        "title": "Cannot save a new car",
         "severity": 2,
-        "_id": "C0FF33"
+        "description": "sdgsdgs",
+        "createdAt": "1542107359454"
     },
     {
-        "title": "Unexpected Response",
+        "_id": "def456",
+        "title": "Login page not loading",
+        "severity": 4,
+        "description": "fthsfgthnsfg",
+        "createdAt": "1542117451234"
+    },
+    {
+        "_id": "ghi789",
+        "title": "Error when deleting user",
+        "description": "User deletion causes a 500 server error",
+        "severity": 4,
+        "createdAt": 1542127554321
+    },
+    {
+        "_id": "jkl012",
+        "title": "Dashboard shows incorrect data",
+        "description": "Data on the dashboard does not reflect the latest entries",
+        "severity": 3,
+        "createdAt": 1542137656543
+    },
+    {
+        "_id": "mno345",
+        "title": "Forgot password link broken",
+        "description": "The forgot password link returns a 404 error",
         "severity": 1,
-        "_id": "G0053"
+        "createdAt": 1542147758765
+    },
+    {
+        "_id": "pqr678",
+        "title": "File upload not working",
+        "description": "Clicking the upload button does nothing",
+        "severity": 3,
+        "createdAt": 1542157859876
     }
 ]

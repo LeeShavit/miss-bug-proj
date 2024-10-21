@@ -3,9 +3,13 @@ import { bugService } from './services/bugs.service.js'
 
 const app = express()
 
-app.get('/', (req, res) => res.send('Hello there'))
 app.listen(3030, () => console.log('Server ready at port 3030'))
 
+//express configuration
+app.use(express.static('public'))
+
+
+//express routing:
 //read list
 app.get('/api/bug', (req, res) => {
     bugService.query()
@@ -18,8 +22,8 @@ app.get('/api/bug', (req, res) => {
 
 //save
 app.get('/api/bug/save', (req, res) => {
-    const { _id, title, severity } = req.query
-    const bugToSave = { _id, title, severity: +severity }
+    const { _id, title, severity, description, createdAt } = req.query
+    const bugToSave = { _id, title, severity: +severity, description, createdAt}
     bugService.save(bugToSave)
         .then(bug => res.send(bug))
         .catch(err => {
@@ -27,6 +31,7 @@ app.get('/api/bug/save', (req, res) => {
             res.status(500).send('Cannot Save bug')
         })
 })
+
 //read item
 app.get('/api/bug/:bugId', (req, res) => {
     const { bugId } = req.params
