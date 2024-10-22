@@ -13,6 +13,7 @@ export const bugService = {
     save,
     remove,
     getDefaultFilter,
+    loadPDF,
 }
 
 
@@ -21,7 +22,7 @@ function query(filterBy) {
         .then(res => res.data)
         .then(bugs => {
             if (filterBy.txt) {
-                const regExp = new RegExp(filterBy.bodyTxt, 'i')
+                const regExp = new RegExp(filterBy.txt, 'i')
                 bugs = bugs.filter(bug => regExp.test(bug.title))
             }
             if (filterBy.minSeverity) {
@@ -30,6 +31,7 @@ function query(filterBy) {
             if (filterBy.date) {
                 bugs = bugs.filter(bug => filterBy.date > bug.createdAt - 43200000 && filterBy.date < bug.createdAt + 43200000)
             }
+            return bugs
         })
 }
 
@@ -48,6 +50,10 @@ function save(bug) {
 
 function getDefaultFilter() {
     return { txt: '', minSeverity: 0, data: '' }
+}
+
+function loadPDF(){
+    return axios.get(BASE_URL+'download')
 }
 
 // function _createBugs() {

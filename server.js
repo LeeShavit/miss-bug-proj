@@ -11,6 +11,7 @@ app.listen(3030, () => console.log('Server ready at port 3030'))
 //express configuration
 app.use(express.static('public'))
 app.use(cookieParser())
+app.use(express.json())
 
 
 //express routing:
@@ -24,10 +25,38 @@ app.get('/api/bug', (req, res) => {
         })
 })
 
-//save
-app.get('/api/bug/save', (req, res) => {
-    const { _id, title, severity, description, createdAt } = req.query
-    const bugToSave = { _id, title, severity: +severity, description, createdAt }
+//saveAsPDF
+app.get('/api/bug/download', (req, res) => {
+    bugService.query()
+        .then(bugs => pdfService.buildBugPDF(bugs))
+        .then(() => {
+            const filePath = './data/bugs.pdf'
+            res.download(filePath, 'bugs.pdf', (err) => {
+                if (err) {
+                    console.error('Error downloading the PDF:', err)
+                    res.status(500).send('Error downloading the file')
+                }
+            })
+        })
+        .catch(err => {
+            console.error('Error creating PDF:', err)
+            res.status(500).send('Cannot create pdf')
+        })
+})
+
+//create
+app.post('/api/bug/', (req, res) => {
+    const bugToSave = { ...req.body, severity: +req.body.severity } 
+    bugService.save(bugToSave)
+        .then(bug => res.send(bug))
+        .catch(err => {
+            console.log('err:', err)
+            res.status(500).send('Cannot Save bug')
+        })
+})
+//update
+app.put('/api/bug/', (req, res) => {
+    const bugToSave = { ...req.body, severity: +req.body.severity } 
     bugService.save(bugToSave)
         .then(bug => res.send(bug))
         .catch(err => {
@@ -60,8 +89,9 @@ app.get('/api/bug/:bugId', (req, res) => {
         })
 
 })
+
 //delete
-app.get('/api/bug/:bugId/remove', (req, res) => {
+app.delete('/api/bug/:bugId', (req, res) => {
     const { bugId } = req.params
     bugService.remove(bugId)
         .then(() => res.send(`bug ${bugId} removed successfully`))
@@ -69,18 +99,4 @@ app.get('/api/bug/:bugId/remove', (req, res) => {
             console.log('err:', err)
             res.status(500).send('Cannot remove bug')
         })
-
-})
-
-//saveAsPDF
-
-app.get('/api/bug/download', (req,res)=>{
-    bugService.query()
-    .then(bugs=> pdfService.buildBugPDF(bugs))
-    .then(()=>{
-        res.status(201).send('file ready')
-    })
-    .catch(err=>{
-        res.status(500).send('Cannot create pdf', err)
-    })
 })

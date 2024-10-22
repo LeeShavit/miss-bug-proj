@@ -1,19 +1,21 @@
 import { bugService } from '../services/bug.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { BugList } from '../cmps/BugList.jsx'
+import { BugFilter } from '../cmps/BugFilter.jsx'
 
 const { useState, useEffect } = React
 
 export function BugIndex() {
     const [bugs, setBugs] = useState(null)
     const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
+    const [pdf, setPDF] = useState(false)
 
     useEffect(() => {
         loadBugs()
     }, [filterBy])
 
     function loadBugs() {
-        bugService.query().then(setBugs)
+        bugService.query(filterBy).then(setBugs)
     }
 
     function onRemoveBug(bugId) {
@@ -73,14 +75,26 @@ export function BugIndex() {
         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     }
 
+    function onDownloadPDF() {
+        bugService.loadPDF()
+            .then(() => setPDF(true))
+            .catch(err => {
+                console.log('Error from download PDF ->', err)
+                showErrorMsg('Cannot download PDF')
+            })
+    }
 
     return (
         <main>
             <section className='info-actions'>
                 <h3>Bugs App</h3>
                 <button onClick={onAddBug}>Add Bug ⛐</button>
+                {pdf
+                    ? <a href="/api/bug/download" download="bugs.pdf">Download PDF</a>
+                    : <button onClick={() => onDownloadPDF()}>Load PDF</button>
+                }
             </section>
-            <filterBy filterBy={filterBy} onSetFilter={onSetFilter}/>
+            <BugFilter filterBy={filterBy} onSetFilter={onSetFilter} />
             <main>
                 <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
             </main>

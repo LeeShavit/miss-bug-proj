@@ -3,7 +3,7 @@ import { utilService } from "../services/util.service.js"
 
 const { useState, useEffect, useRef } = React
 
-export function CarFilter({ filterBy, onSetFilter }) {
+export function BugFilter({ filterBy, onSetFilter }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     const onSetFilterDebounce = useRef(utilService.debounce(onSetFilter, 700))
