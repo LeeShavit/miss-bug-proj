@@ -1,51 +1,226 @@
 [
     {
-        "title": "bug 20",
-        "severity": 5,
-        "description": "sdgsd5525gs",
-        "createdAt": "1542107351154",
-        "_id": "rmqky"
-    },
-    {
-        "_id": "abc123",
-        "title": "Cannot save a new car",
-        "severity": 2,
-        "description": "sdgsdgs",
-        "createdAt": "1542107359454"
-    },
-    {
         "_id": "def456",
-        "title": "Login page not loading",
+        "title": "Login page crashes on Firefox",
+        "description": "Users unable to login using Firefox browser - page crashes after submit",
         "severity": 4,
-        "description": "fthsfgthnsfg",
-        "createdAt": "1542117451234"
+        "createdAt": 1542107459454,
+        "labels": [
+            "critical",
+            "frontend",
+            "authentication"
+        ],
+        "creator": {
+            "_id": "u102",
+            "fullname": "Muki Cohen"
+        }
     },
     {
         "_id": "ghi789",
-        "title": "Error when deleting user",
-        "description": "User deletion causes a 500 server error",
-        "severity": 4,
-        "createdAt": 1542127554321
+        "title": "Profile image upload fails",
+        "description": "Error 500 when trying to upload profile pictures larger than 1MB",
+        "severity": 2,
+        "createdAt": 1542107559454,
+        "labels": [
+            "medium-priority",
+            "backend",
+            "file-issue"
+        ],
+        "creator": {
+            "_id": "u103",
+            "fullname": "Shuki Levy"
+        }
     },
     {
         "_id": "jkl012",
-        "title": "Dashboard shows incorrect data",
-        "description": "Data on the dashboard does not reflect the latest entries",
+        "title": "Search function returns no results",
+        "description": "Global search bar not returning any results despite indexed content",
         "severity": 3,
-        "createdAt": 1542137656543
+        "createdAt": 1542107659454,
+        "labels": [
+            "medium-priority",
+            "backend",
+            "data-issue"
+        ],
+        "creator": {
+            "_id": "u104",
+            "fullname": "Dana Berg"
+        }
     },
     {
         "_id": "mno345",
-        "title": "Forgot password link broken",
-        "description": "The forgot password link returns a 404 error",
-        "severity": 1,
-        "createdAt": 1542147758765
+        "title": "Payment processing timeout",
+        "description": "Checkout process timing out for payments over $1000",
+        "severity": 4,
+        "createdAt": 1542107759454,
+        "labels": [
+            "critical",
+            "backend",
+            "urgent"
+        ],
+        "creator": {
+            "_id": "u101",
+            "fullname": "Puki Ja"
+        }
     },
     {
         "_id": "pqr678",
-        "title": "File upload not working",
-        "description": "Clicking the upload button does nothing",
+        "title": "Email notifications not sending",
+        "description": "Automated email notifications for new orders not being triggered",
         "severity": 3,
-        "createdAt": 1542157859876
+        "createdAt": 1542107859454,
+        "labels": [
+            "medium-priority",
+            "backend",
+            "notification-system"
+        ],
+        "creator": {
+            "_id": "u105",
+            "fullname": "Ron Tal"
+        }
+    },
+    {
+        "_id": "stu901",
+        "title": "Dashboard metrics incorrect",
+        "description": "Sales metrics on dashboard showing incorrect totals for current month",
+        "severity": 3,
+        "createdAt": 1542107959454,
+        "labels": [
+            "medium-priority",
+            "frontend",
+            "data-issue"
+        ],
+        "creator": {
+            "_id": "u102",
+            "fullname": "Muki Cohen"
+        }
+    },
+    {
+        "_id": "vwx234",
+        "title": "Mobile menu not responsive",
+        "description": "Navigation menu breaks on mobile devices below 375px width",
+        "severity": 2,
+        "createdAt": 1542108059454,
+        "labels": [
+            "low-priority",
+            "frontend",
+            "ui-issue"
+        ],
+        "creator": {
+            "_id": "u103",
+            "fullname": "Shuki Levy"
+        }
+    },
+    {
+        "_id": "yz0567",
+        "title": "Password reset link expired",
+        "description": "Password reset links expire too quickly before user can complete reset",
+        "severity": 3,
+        "createdAt": 1542108159454,
+        "labels": [
+            "medium-priority",
+            "authentication",
+            "user-experience"
+        ],
+        "creator": {
+            "_id": "u104",
+            "fullname": "Dana Berg"
+        }
+    },
+    {
+        "_id": "aaa111",
+        "title": "Cart items disappearing",
+        "description": "Items in shopping cart vanish after 30 minutes of inactivity",
+        "severity": 4,
+        "createdAt": 1542108259454,
+        "labels": [
+            "critical",
+            "frontend",
+            "user-experience"
+        ],
+        "creator": {
+            "_id": "u105",
+            "fullname": "Ron Tal"
+        }
+    },
+    {
+        "_id": "bbb222",
+        "title": "Print function error",
+        "description": "PDF generation fails when order contains more than 10 items",
+        "severity": 4,
+        "createdAt": 1542108359454,
+        "labels": [
+            "low-priority",
+            "backend",
+            "file-issue"
+        ],
+        "creator": {
+            "_id": "u101",
+            "fullname": "Puki Ja"
+        }
+    },
+    {
+        "_id": "ccc333",
+        "title": "Admin panel access denied",
+        "description": "Some admin users getting unauthorized error despite correct permissions",
+        "severity": 4,
+        "createdAt": 1542108459454,
+        "labels": [
+            "critical",
+            "backend",
+            "authentication"
+        ],
+        "creator": {
+            "_id": "u102",
+            "fullname": "Muki Cohen"
+        }
+    },
+    {
+        "_id": "ddd444",
+        "title": "Sorting not working in tables",
+        "description": "Column sorting in data tables not functioning on any pages",
+        "severity": 2,
+        "createdAt": 1542108559454,
+        "labels": [
+            "low-priority",
+            "frontend",
+            "ui-issue"
+        ],
+        "creator": {
+            "_id": "u103",
+            "fullname": "Shuki Levy"
+        }
+    },
+    {
+        "_id": "eee555",
+        "title": "API rate limiting issue",
+        "description": "External API calls being rate limited incorrectly",
+        "severity": 3,
+        "createdAt": 1542108659454,
+        "labels": [
+            "medium-priority",
+            "backend",
+            "performance"
+        ],
+        "creator": {
+            "_id": "u104",
+            "fullname": "Dana Berg"
+        }
+    },
+    {
+        "_id": "fff666",
+        "title": "Session timeout too short",
+        "description": "Users being logged out after only 5 minutes of inactivity",
+        "severity": 2,
+        "createdAt": 1542108759454,
+        "labels": [
+            "low-priority",
+            "backend",
+            "user-experience"
+        ],
+        "creator": {
+            "_id": "u105",
+            "fullname": "Ron Tal"
+        }
     }
 ]

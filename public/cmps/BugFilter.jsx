@@ -21,15 +21,12 @@ export function BugFilter({ filterBy, onSetFilter }) {
             case 'range':
                 value = +value
                 break;
-
             case 'checkbox':
                 value = target.checked
                 break
-
             default:
                 break;
         }
-
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
@@ -38,7 +35,7 @@ export function BugFilter({ filterBy, onSetFilter }) {
         onSetFilter(filterByToEdit)
     }
 
-    const { txt, minSeverity, date } = filterByToEdit
+    const { txt, minSeverity, labels } = filterByToEdit
 
     return (
         <section className="bug-filter">
@@ -47,11 +44,11 @@ export function BugFilter({ filterBy, onSetFilter }) {
                 <label htmlFor="txt">title</label>
                 <input value={txt} onChange={handleChange} name="txt" type="text" id="txt" />
 
+                <label htmlFor="labels">labels</label>
+                <input value={labels} onChange={handleChange} name="labels" type="text" id="labels" />
+
                 <label htmlFor="minSeverity">Min Severity</label>
                 <input value={minSeverity || ''} onChange={handleChange} name="minSeverity" type="number" id="minSeverity" />
-
-                <label htmlFor="date">Date</label>
-                <input value={date || ''} onChange={handleChange} name="date" type="date" id="date" />
 
                 <button>Submit</button>
             </form>

@@ -2,20 +2,22 @@ import { bugService } from '../services/bug.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { BugList } from '../cmps/BugList.jsx'
 import { BugFilter } from '../cmps/BugFilter.jsx'
+import { BugSort } from '../cmps/BugSort.jsx'
 
 const { useState, useEffect } = React
 
 export function BugIndex() {
     const [bugs, setBugs] = useState(null)
     const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
+    const [sortBy, setSortBy] = useState(bugService.getDefaultSort())
     const [pdf, setPDF] = useState(false)
 
     useEffect(() => {
         loadBugs()
-    }, [filterBy])
+    }, [filterBy, sortBy])
 
     function loadBugs() {
-        bugService.query(filterBy).then(setBugs)
+        bugService.query(filterBy, sortBy).then(setBugs)
     }
 
     function onRemoveBug(bugId) {
@@ -75,6 +77,21 @@ export function BugIndex() {
         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     }
 
+    function onSetSort(sortBy) {
+        setSortBy(prevSort => ({ ...prevSort, ...sortBy }))
+    }
+
+    function onTogglePagination() {
+        if (filterBy.pageIdx || filterBy.pageIdx === 0) setFilterBy(prevFilter => ({ ...prevFilter, pageIdx: '' }))
+        else setFilterBy(prevFilter => ({ ...prevFilter, pageIdx: 0 }))
+    }
+
+    function onChangePage(diff) {
+        let nextPageIdx = filterBy.pageIdx + diff
+        if (nextPageIdx < 0) nextPageIdx = 0
+        setFilterBy(prevFilter => ({ ...prevFilter, pageIdx: nextPageIdx }))
+    }
+
     function onDownloadPDF() {
         bugService.loadPDF()
             .then(() => setPDF(true))
@@ -93,8 +110,17 @@ export function BugIndex() {
                     ? <a href="/api/bug/download" download="bugs.pdf">Download PDF</a>
                     : <button onClick={() => onDownloadPDF()}>Load PDF</button>
                 }
+                <button onClick={onTogglePagination}>Pages?</button>
+                {(filterBy.pageIdx || filterBy.pageIdx === 0) &&
+                    <h4>
+                        <button onClick={() => onChangePage(-1)}>←</button>
+                        <span>{filterBy.pageIdx}</span>
+                        <button onClick={() => onChangePage(1)}>→</button>
+                    </h4>
+                }
             </section>
             <BugFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+            <BugSort sortBy={sortBy} onSetSort={onSetSort} />
             <main>
                 <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
             </main>

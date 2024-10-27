@@ -1,0 +1,55 @@
+[
+    {
+        "username": "admin",
+        "password": "admin",
+        "fullname": "Admin",
+        "_id": "5C9A2",
+        "isAdmin": "true"
+    },
+    {
+        "_id": "OfHFO",
+        "fullname": "Lee Lush",
+        "username": "pukkners",
+        "isAdmin": "false"
+    },
+    {
+        "_id": "u101",
+        "username": "pukija",
+        "fullname": "Puki Ja",
+        "password": "hash_123",
+        "score": 87,
+        "isAdmin": "false"
+    },
+    {
+        "_id": "u102",
+        "username": "mukic",
+        "fullname": "Muki Cohen",
+        "password": "hash_456",
+        "score": 95,
+        "isAdmin": "false"
+    },
+    {
+        "_id": "u103",
+        "username": "shukil",
+        "fullname": "Shuki Levy",
+        "password": "hash_789",
+        "score": 76,
+        "isAdmin": "false"
+    },
+    {
+        "_id": "u104",
+        "username": "danab",
+        "fullname": "Dana Berg",
+        "password": "hash_012",
+        "score": 92,
+        "isAdmin": "true"
+    },
+    {
+        "_id": "u105",
+        "username": "ront",
+        "fullname": "Ron Tal",
+        "password": "hash_345",
+        "score": 88,
+        "isAdmin": "false"
+    }
+]
